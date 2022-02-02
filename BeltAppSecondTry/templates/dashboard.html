@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Welcome, {{Thisuser.Fname}} </h1>
+    <a href="/logout">Logout</a>
+    <a href="/addnewjob">Add a Job</a>
+    <table>
+        <tr>
+            <th>Job</th>
+            <th>Location</th>
+            <th>Action</th>
+        </tr>
+        {% for job in All_Jobs %}
+            <tr>
+                {% if Thisuser not in job.usersjob.all %}
+                <td>{{job.title}}</td>
+                <td>{{job.location}}</td>
+                <td><a href="/view/{{job.id}}">View</a> <a href="/addtouser/{{job.id}}">add</a> {% if Thisuser.id == job.user.id %}<a href="/edit/{{job.id}}">edit</a> <a href="/cancel/{{job.id}}">cancel</a></td>{% endif %}
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+    <table>
+        <th>My Jobs</th>
+        {% for job in All_Jobs %}
+        <tr>
+            {% if Thisuser in job.usersjob.all %}
+            <td>{{job.title}}</td>
+            <td><a href="/view/{{job.id}}">View</a> <a href="/done/{{job.id}}">Done</a></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+</body>
+</html>

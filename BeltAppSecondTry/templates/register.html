@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Registration</h1>
+    <form action="/register" method="post">
+        {% csrf_token %}
+        <label for="Fname">First Name</label>
+        <input type="text" name="Fname" id="Fname">
+        <label for="Lname">Last Name</label>
+        <input type="text" name="Lname" id="Lname">
+        <label for="email">Email</label>
+        <input type="text" name="email" id="email">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password">
+        <label for="pwconfirm">Confirm PW</label>
+        <input type="password" name="pwconfirm" id="pwconfirm">
+        <input type="submit" value="Register">
+    </form>
+    {% if messages %}
+    <ul>
+        {% for eachmessage in messages %}
+            <li>{{eachmessage}}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <h1>Login</h1>
+    <form action="/login" method="post">
+        {% csrf_token %}
+        <label for="logemail">Email</label>
+        <input type="text" name="logemail" id="logemail">
+        <label for="logpasssword">Password</label>
+        <input type="password" name="logpassword" id="logpassword">
+        <input type="submit" value="Log In">
+    </form>
+    {% if messages %}
+    <ul>
+        {% for eachmessage in messages %}
+            <li>{{eachmessage}}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+</body>
+</html>
